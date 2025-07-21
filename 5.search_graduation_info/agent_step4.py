@@ -16,7 +16,7 @@ model_id = os.environ["BEDROCK_MODEL_ID"]
 llm = LLM(
     model=f"bedrock/{model_id}",
     temperature=0.3,
-    max_tokens=1000
+    max_tokens=4000
 )
 
 # Create tool instances
