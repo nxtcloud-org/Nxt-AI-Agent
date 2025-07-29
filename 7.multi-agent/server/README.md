@@ -1,4 +1,4 @@
-# 리팩토링된 멀티 에이전트 학사 상담 시스템
+# 멀티 에이전트 학사 상담 시스템
 
 ## 🚀 주요 개선사항
 
@@ -29,7 +29,7 @@
 ## 📁 프로젝트 구조
 
 ```
-7.multi-agent-refactored/
+7.multi-agent/
 ├── base_tool.py              # 공통 기능 베이스 클래스
 ├── semester_utils.py         # 학기 관리 유틸리티
 ├── query_parser.py          # 자연어 쿼리 파싱
