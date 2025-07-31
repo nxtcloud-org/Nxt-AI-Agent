@@ -279,29 +279,37 @@ class AgentSystem:
     
     def process_query(self, question: str) -> str:
         """사용자 질문 처리"""
-        print(f"🔍 질문 분석 중: {question}")
-        
         # 질문 유형 분류
         question_type = self.classify_question(question)
-        print(f"📋 질문 유형: {question_type.value}")
         
         # Task 생성
         tasks = self.create_tasks(question, question_type)
-        print(f"⚙️ 생성된 Task 수: {len(tasks)}개")
         
         # 참여 에이전트 수집
         agents = list(set([task.agent for task in tasks]))
-        print(f"👥 참여 에이전트 수: {len(agents)}개")
         
         # Crew 생성 및 실행
         crew = Crew(
             agents=agents,
             tasks=tasks,
             process=Process.sequential,
-            verbose=True
+            verbose=False  # 디버깅 메시지 제거
         )
         
         result = crew.kickoff()
+        return result
+    
+    async def process_query_async(self, question: str) -> str:
+        """비동기 사용자 질문 처리"""
+        import asyncio
+        loop = asyncio.get_event_loop()
+        
+        # CPU 집약적 작업을 별도 스레드에서 실행
+        result = await loop.run_in_executor(
+            None, 
+            self.process_query, 
+            question
+        )
         return result
 
 

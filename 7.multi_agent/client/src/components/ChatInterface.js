@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import config from "../config";
 import "./ChatInterface.css";
 
 const ChatInterface = ({ studentData }) => {
@@ -36,7 +37,7 @@ const ChatInterface = ({ studentData }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/chat", {
+      const response = await fetch(`${config.API_URL}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

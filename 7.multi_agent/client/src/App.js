@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import ChatInterface from "./components/ChatInterface";
+import config from "./config";
 import "./App.css";
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
     setIsLoading(true);
     try {
       // 학생 인증 API 호출
-      const response = await fetch("/api/auth/verify", {
+      const response = await fetch(`${config.API_URL}/api/auth/verify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
