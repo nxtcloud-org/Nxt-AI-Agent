@@ -75,17 +75,6 @@ if __name__ == "__main__":
     print(f"현재 학기: {semester_info['current_semester_year']}년 {semester_info['current_semester']}학기" if semester_info['current_semester'] else "현재: 방학 기간")
     print(f"다음 학기: {semester_info['next_semester_year']}년 {semester_info['next_semester']}학기\n")
     
-    for i, question in enumerate(test_questions, 1):
-        print(f"[테스트 {i}] 질문: {question}")
-        print("-" * 50)
-        try:
-            result = process_query(question)
-            print(f"답변: {result}")
-        except Exception as e:
-            print(f"오류: {str(e)}")
-        print("=" * 50)
-        print()
-    
     # 사용자 입력 받기
     print("\n직접 질문해보세요 (종료하려면 'quit' 입력):")
     print("예시 질문:")
