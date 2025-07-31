@@ -42,13 +42,14 @@ class GraduationAgentSystem:
     def _create_agent(self) -> Agent:
         """졸업 요건 전문가 에이전트 생성"""
         return Agent(
-            role='졸업 요건 전문가',
-            goal='학과별, 연도별 졸업 요건을 정확하게 제공합니다',
-            backstory=self._get_graduation_expert_backstory(),
-            llm=self.llm,
-            tools=[self.tools['graduation']],
+            # TODO: 이 부분을 수정해주세요!
+            role='',
+            goal='',
+            backstory='',
+            llm='',
+            tools=[],
             verbose=True,
-            max_iter=2,
+            max_iter=3,
             allow_delegation=False
         )
     

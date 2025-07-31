@@ -42,13 +42,14 @@ class CourseAgentSystem:
     def _create_agent(self) -> Agent:
         """강의 정보 전문가 에이전트 생성"""
         return Agent(
-            role='강의 정보 전문가',
-            goal='강의 정보를 검색하고 분석합니다',
-            backstory=self._get_course_expert_backstory(),
-            llm=self.llm,
-            tools=[self.tools['course']],
+            # TODO: 이 부분을 수정해주세요!
+            role='',
+            goal='',
+            backstory='',
+            llm='',
+            tools=[],
             verbose=True,
-            max_iter=2,
+            max_iter=3,
             allow_delegation=False
         )
     
