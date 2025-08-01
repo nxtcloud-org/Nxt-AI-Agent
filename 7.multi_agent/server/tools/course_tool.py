@@ -83,7 +83,7 @@ class CourseTool(BaseTool):
         year, semester = semester_map[semester_type]
         
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             sql_query = """
             SELECT 
@@ -115,7 +115,7 @@ class CourseTool(BaseTool):
     def _search_all_courses(self, semester_info: Dict) -> str:
         """전체 강의 검색"""
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             sql_query = """
             SELECT 
@@ -152,7 +152,7 @@ class CourseTool(BaseTool):
         sql_query, params = self._build_dynamic_query(conditions)
         
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             cursor.execute(sql_query, params)
             results = cursor.fetchall()
             

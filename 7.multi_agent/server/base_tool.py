@@ -2,7 +2,7 @@
 공통 기능을 제공하는 베이스 도구 클래스
 """
 import os
-import mysql.connector
+import pymysql
 import psycopg2
 import psycopg2.extras
 from abc import ABC, abstractmethod
@@ -19,16 +19,18 @@ class DatabaseManager:
         """MySQL 연결 컨텍스트 매니저"""
         connection = None
         try:
-            connection = mysql.connector.connect(
+            connection = pymysql.connect(
                 host=os.environ["RDS_HOST"],
                 port=int(os.environ["RDS_PORT"]),
                 database=os.environ["RDS_DATABASE"],
                 user=os.environ["RDS_USERNAME"],
-                password=os.environ["RDS_PASSWORD"]
+                password=os.environ["RDS_PASSWORD"],
+                charset='utf8mb4',
+                cursorclass=pymysql.cursors.DictCursor
             )
             yield connection
         finally:
-            if connection and connection.is_connected():
+            if connection:
                 connection.close()
     
     @staticmethod

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>학사 상담 AI 에이전트 서버</title>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .container {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 30px;
+      }
+      .status {
+        background: #d4edda;
+        color: #155724;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border-left: 4px solid #28a745;
+      }
+      .info {
+        background: #e7f3ff;
+        color: #0c5460;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border-left: 4px solid #17a2b8;
+      }
+      .links {
+        margin-top: 30px;
+      }
+      .links a {
+        display: inline-block;
+        background: #007bff;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 6px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+      .links a:hover {
+        background: #0056b3;
+      }
+      code {
+        background: #f8f9fa;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: "Monaco", "Consolas", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎓 학사 상담 AI 에이전트 서버</h1>
+
+      <div class="status">
+        ✅ <strong>서버가 정상적으로 실행 중입니다!</strong>
+      </div>
+
+      <div class="info">
+        <h3>📋 서버 정보</h3>
+        <p><strong>서비스:</strong> FastAPI + CrewAI 멀티 에이전트 시스템</p>
+        <p><strong>포트:</strong> 8000</p>
+        <p><strong>상태:</strong> 활성화</p>
+      </div>
+
+      <div class="info">
+        <h3>🔗 API 엔드포인트</h3>
+        <p><code>POST /api/auth/verify</code> - 학생 인증</p>
+        <p><code>POST /api/chat</code> - AI 에이전트 채팅</p>
+        <p><code>GET /api/health</code> - 서버 상태 확인</p>
+      </div>
+
+      <div class="links">
+        <a href="/docs" target="_blank">📚 API 문서</a>
+        <a href="/api/health" target="_blank">🔍 Health Check</a>
+      </div>
+
+      <div class="info">
+        <h3>💡 React 클라이언트 설정</h3>
+        <p>.env 파일에 다음과 같이 설정하세요:</p>
+        <code>REACT_APP_API_URL=http://현재서버IP:8000</code>
+      </div>
+    </div>
+  </body>
+</html>

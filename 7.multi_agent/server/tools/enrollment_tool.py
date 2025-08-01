@@ -84,7 +84,7 @@ class EnrollmentTool(BaseTool):
     def _check_enrollment_exists(self) -> bool:
         """이수 과목 존재 여부 확인"""
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             cursor.execute("SELECT COUNT(DISTINCT course_code) as count FROM enrollments WHERE student_id = %s", 
                          (self.authenticated_student_id,))
             result = cursor.fetchone()
@@ -93,7 +93,7 @@ class EnrollmentTool(BaseTool):
     def _get_all_enrollments(self) -> str:
         """전체 이수 과목 조회"""
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             sql_query = """
             SELECT DISTINCT
@@ -125,7 +125,7 @@ class EnrollmentTool(BaseTool):
         conditions = QueryParser.parse_enrollment_conditions(query)
         
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             sql_query = """
             SELECT 
@@ -164,7 +164,7 @@ class EnrollmentTool(BaseTool):
         conditions = QueryParser.parse_enrollment_conditions(query)
         
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             sql_query = """
             SELECT 
@@ -201,7 +201,7 @@ class EnrollmentTool(BaseTool):
     def _get_enrollment_statistics(self) -> str:
         """이수 과목 통계 정보"""
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             # 전체 통계
             cursor.execute("""

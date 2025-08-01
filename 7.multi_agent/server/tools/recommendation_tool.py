@@ -93,7 +93,7 @@ class RecommendationTool(BaseTool):
     def _get_student_info(self, student_id: str) -> Optional[Dict]:
         """학생 기본 정보를 조회합니다."""
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             cursor.execute("""
                 SELECT 
@@ -115,7 +115,7 @@ class RecommendationTool(BaseTool):
     def _get_completed_courses(self, student_id: str) -> List[Dict]:
         """학생의 수강 완료 과목 목록을 조회합니다."""
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             cursor.execute("""
                 SELECT 
@@ -139,7 +139,7 @@ class RecommendationTool(BaseTool):
     def _get_available_courses(self, semester: str, major_code: str) -> List[Dict]:
         """특정 학기에 개설되는 과목 목록을 조회합니다."""
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             cursor.execute("""
                 SELECT DISTINCT

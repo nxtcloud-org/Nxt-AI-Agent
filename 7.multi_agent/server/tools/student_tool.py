@@ -70,7 +70,7 @@ class StudentTool(BaseTool):
     def _get_my_info(self) -> str:
         """본인 정보 조회"""
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             sql_query = """
             SELECT 
@@ -97,7 +97,7 @@ class StudentTool(BaseTool):
     def _get_similar_students_stats(self) -> str:
         """비슷한 조건 학생들의 통계 정보"""
         with DatabaseManager.mysql_connection() as connection:
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             
             # 본인 정보 먼저 조회
             cursor.execute("""

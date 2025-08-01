@@ -1,5 +1,5 @@
 """
-리팩토링된 멀티 에이전트 시스템
+멀티 에이전트 시스템
 """
 import os
 from crewai import Agent, Crew, Task, Process, LLM
@@ -76,7 +76,7 @@ class AgentSystem:
             llm=self.llm,
             tools=[self.tools['student'], self.tools['enrollment']],
             verbose=True,
-            max_iter=3,
+            max_iter=20,
             allow_delegation=False
         )
         
@@ -88,7 +88,7 @@ class AgentSystem:
             llm=self.llm,
             tools=[self.tools['graduation']],
             verbose=True,
-            max_iter=2,
+            max_iter=20,
             allow_delegation=False
         )
         
@@ -100,7 +100,7 @@ class AgentSystem:
             llm=self.llm,
             tools=[self.tools['course']],
             verbose=True,
-            max_iter=2,
+            max_iter=20,
             allow_delegation=False
         )
         
@@ -125,7 +125,7 @@ class AgentSystem:
             llm=self.llm,
             tools=[],
             verbose=True,
-            max_iter=1,
+            max_iter=20,
             allow_delegation=False
         )
         
@@ -220,19 +220,31 @@ class AgentSystem:
         """질문 유형 분류"""
         question_lower = question.lower()
         
-        # 키워드 매핑
-        keyword_mapping = {
-            QuestionType.COMPREHENSIVE: ['종합', '전체', '모든', '완전한', '전반적', '총괄'],
-            QuestionType.GRADUATION: ['졸업', '요건', '학점', '필수', '이수', '논문', '인증'],
-            QuestionType.RECOMMENDATION: ['추천', '수강', '계획', '로드맵', '다음학기', '선택'],
-            QuestionType.COURSE: ['강의', '과목', '시간표', '교수', '강좌'],
-            QuestionType.STUDENT: ['내', '현황', '성적', '이력', '정보', '분석']
-        }
+        # 우선순위 기반 키워드 매칭 (더 구체적인 것부터 확인)
         
-        # 키워드 매칭
-        for question_type, keywords in keyword_mapping.items():
-            if any(keyword in question_lower for keyword in keywords):
-                return question_type
+        # 1. 개인 정보 관련 (가장 우선)
+        if any(keyword in question_lower for keyword in ['내 이수', '내 학기', '내 정보', '내 현황', '내 성적', '내 이력', '내 분석', '내 학점']):
+            return QuestionType.STUDENT
+            
+        # 2. 종합 분석
+        if any(keyword in question_lower for keyword in ['종합', '전체', '모든', '완전한', '전반적', '총괄']):
+            return QuestionType.COMPREHENSIVE
+            
+        # 3. 졸업 요건 (구체적인 키워드만)
+        if any(keyword in question_lower for keyword in ['졸업 요건', '졸업 학점', '졸업 논문', '졸업 인증', '졸업']):
+            return QuestionType.GRADUATION
+            
+        # 4. 수강 추천
+        if any(keyword in question_lower for keyword in ['추천', '수강', '계획', '로드맵', '다음학기', '선택']):
+            return QuestionType.RECOMMENDATION
+            
+        # 5. 강의 정보
+        if any(keyword in question_lower for keyword in ['강의', '과목', '시간표', '교수', '강좌']):
+            return QuestionType.COURSE
+            
+        # 6. 일반 개인 정보 (마지막)
+        if any(keyword in question_lower for keyword in ['내', '현황', '성적', '이력', '정보', '분석']):
+            return QuestionType.STUDENT
         
         return QuestionType.GENERAL
     
@@ -304,13 +316,19 @@ class AgentSystem:
         import asyncio
         loop = asyncio.get_event_loop()
         
-        # CPU 집약적 작업을 별도 스레드에서 실행
-        result = await loop.run_in_executor(
-            None, 
-            self.process_query, 
-            question
-        )
-        return result
+        try:
+            # CPU 집약적 작업을 별도 스레드에서 실행
+            result = await loop.run_in_executor(
+                None, 
+                self.process_query, 
+                question
+            )
+            return result
+        except Exception as e:
+            print(f"❌ 에이전트 시스템 오류: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return f"죄송합니다. 처리 중 오류가 발생했습니다: {str(e)}"
 
 
 def main():
@@ -318,7 +336,7 @@ def main():
     # 시스템 초기화
     system = AgentSystem()
     
-    print("=== 리팩토링된 멀티 에이전트 학사 상담 시스템 ===")
+    print("=== 멀티 에이전트 학사 상담 시스템 ===")
     print("특징: 최적화된 구조, 반복문 최소화, 깔끔한 코드")
     print("장점: 높은 성능, 유지보수성, 확장성")
     print(f"현재 학기: {system.semester_info['current_semester_year']}년 {system.semester_info['current_semester']}학기" if system.semester_info['current_semester'] else "현재: 방학 기간")
