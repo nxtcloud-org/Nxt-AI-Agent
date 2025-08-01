@@ -89,7 +89,6 @@ const ChatInterface = ({ studentData }) => {
     "내 졸업 요건 알려줘",
     "다음 학기 추천해줘",
     "내 성적 분석해줘",
-    "전체 현황 분석해줘",
   ];
 
   const handleSuggestedQuestion = (question) => {
