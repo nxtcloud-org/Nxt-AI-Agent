@@ -358,7 +358,7 @@ def main():
             break
         if user_input:
             try:
-                print(f"\n🤖 리팩토링된 멀티 에이전트 시스템 처리 중...\n")
+                print(f"\n🤖 멀티 에이전트 시스템 처리 중...\n")
                 result = system.process_query(user_input)
                 print(f"답변: {result}")
                 print("\n" + "="*50)
