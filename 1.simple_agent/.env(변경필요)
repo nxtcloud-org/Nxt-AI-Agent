@@ -1,6 +1,2 @@
 # AWS Bedrock Settings
 BEDROCK_MODEL_ID=
-
-# Alternative AWS credentials (if needed instead of bearer token)
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=

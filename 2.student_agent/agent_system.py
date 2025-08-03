@@ -34,7 +34,7 @@ enrollment_tool.set_authenticated_user(AUTHENTICATED_STUDENT_ID)
 
 # 단일 통합 에이전트 생성
 academic_advisor_agent = Agent(
-    # TODO: 이 부분을 수정해주세요!s
+    # TODO: 이 부분을 수정해주세요!
     role='',
     goal='',
     backstory=f'',
