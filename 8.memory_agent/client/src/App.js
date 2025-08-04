@@ -42,7 +42,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>🎓 학사 상담 AI 에이전트</h1>
+        <h1>🎓 학사 상담 AI 에이전트 2</h1>
         {authenticatedStudent && (
           <div className="user-info">
             <span>
