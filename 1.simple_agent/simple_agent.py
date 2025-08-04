@@ -17,9 +17,9 @@ llm = LLM(
 
 # Create a simple agent without any tools
 simple_agent = Agent(
-    role='친근한 AI 어시스턴트',
+    role='친근한 AI 에이전트',
     goal='사용자와 자연스럽고 도움이 되는 대화를 나누며, 질문에 최선을 다해 답변합니다',
-    backstory='''당신은 친근하고 도움이 되는 AI 어시스턴트입니다.
+    backstory='''당신은 친근하고 도움이 되는 AI 에이전트입니다.
     
     특징:
     - 사용자와 자연스럽게 대화합니다
@@ -65,8 +65,8 @@ def chat_with_simple_agent(question: str) -> str:
     return result
 
 if __name__ == "__main__":
-    print("=== 간단한 AI 어시스턴트 ===")
-    print("안녕하세요! 저는 간단한 AI 어시스턴트입니다.")
+    print("=== 간단한 AI 에이전트 ===")
+    print("안녕하세요! 저는 간단한 AI 에이전트입니다.")
     print("궁금한 것이 있으면 언제든 물어보세요!")
     print("(종료하려면 'quit', 'exit', '종료' 중 하나를 입력하세요)\n")
     
